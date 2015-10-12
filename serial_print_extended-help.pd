@@ -120,26 +120,26 @@ it.;
 #X floatatom 72 396 0 0 0 0 - - -;
 #X obj 72 374 r receive_float;
 #X text 90 171 outputs a float;
-#X text 61 28 With [serial_print] it's possible to receive \, floats
-\, strings instead of numeral values \, or even bangs. Close [comport]
-in the parent patch and load the float_string_bang.ino sketch to your
-Arduino board. Then open its serial port in this subpatch and click
-on the radio buttons below. The top button prints the Arduino hard-coded
-Pi \, the middle button prints a string to the symbol atom below \,
-and the bottom button outputs a bang which is printed on Pd's console.
-Check the Arduino sketch for details.;
 #X obj 72 310 serial_print_extended;
+#X text 61 28 With [serial_print_extended] it's possible to receive
+floats \, strings instead of numeral values \, or even bangs. Close
+[comport] in the parent patch and load the float_string_bang.ino sketch
+to your Arduino board. Then open its serial port in this subpatch and
+click on the radio buttons below. The top button prints the Arduino
+hard-coded Pi \, the middle button prints a string to the symbol atom
+below \, and the bottom button outputs a bang which is printed on Pd's
+console. Check the Arduino sketch for details.;
 #X connect 0 0 5 0;
 #X connect 2 0 3 0;
 #X connect 4 0 12 0;
-#X connect 5 0 17 0;
+#X connect 5 0 16 0;
 #X connect 6 0 7 0;
 #X connect 7 0 5 0;
 #X connect 8 0 9 0;
 #X connect 9 0 5 0;
 #X connect 14 0 13 0;
-#X connect 17 0 1 0;
-#X connect 17 1 1 1;
+#X connect 16 0 1 0;
+#X connect 16 1 1 1;
 #X restore 43 621 pd receive_floats_strings_and_bangs;
 #X connect 0 0 13 0;
 #X connect 3 0 13 0;
