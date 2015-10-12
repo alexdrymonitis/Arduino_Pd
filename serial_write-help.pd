@@ -1,0 +1,74 @@
+#N canvas 159 86 996 569 10;
+#X msg 54 387 close;
+#X obj 37 14 cnv 15 400 40 empty empty empty 20 12 0 14 -200075 -66577
+0;
+#X text 746 504 Written by Alexandros Drymonitis;
+#X msg 43 360 devices;
+#X floatatom 103 368 5 0 0 0 - - -, f 5;
+#X msg 103 387 open \$1;
+#X text 540 223 Inlets:;
+#X text 580 240 1st: bytes from [comport];
+#X text 540 286 Outlets:;
+#X text 49 19 [serial_write]: abstraction that works with Arduinos'
+Serial.write() function (with the use of [comport]);
+#X text 40 78 [serial_write] is a vanilla abstraction that works with
+[comport] and Arduino's Serial.write() function.;
+#X obj 43 452 serial_write analog 3 digital 3;
+#X obj 43 475 unpack f f f;
+#X obj 226 475 unpack f f f;
+#X obj 226 498 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 260 498 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 295 498 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 43 499 5 0 0 0 - - -, f 5;
+#X floatatom 77 499 5 0 0 0 - - -, f 5;
+#X floatatom 112 499 5 0 0 0 - - -, f 5;
+#X obj 43 430 comport 6 57600;
+#X text 41 115 You must specify the type of pins you want to read (analog
+or digital) and how many pins of this type you'll be reading. At least
+two arguments are necessary \, the third and fourth are optional \,
+you don't need them in case you read only one kind of pins. The order
+of the arguments must be aligned with the Arduino code. If you first
+read the analog pins \, then the first argument must be "analog" \,
+like in the example below.;
+#X text 40 235 This help patch works with the serial_write.ino sketch.
+Check it for more information.;
+#X text 541 26 Arguments:;
+#X text 600 47 1st (obligatory): type of pins you are reading (analog
+or digital);
+#X text 603 75 2nd (obligatory): number of pins of the type specified
+by the first argument;
+#X text 604 107 3rd (optional): type of pins you are reading (if first
+argument is "analog" \, then this is "digital" \, and vice versa);
+#X text 603 151 4th (optional. if third argument provided \, then this
+is obligatory as well): number of pins of the type specified by the
+third argument;
+#X msg 241 419 digital 3;
+#X msg 226 394 analog 3;
+#X text 580 259 2nd: message to set number of pins with type;
+#X text 584 304 1st: list of values of the type specified by the first
+argument;
+#X text 584 339 2nd: list of values of the type specified by the third
+argument;
+#X text 41 271 Note: the digital pins are using the internal pull-up
+resistors \, using INPUT_PULLUP \, so you don't need to use resistors
+for switch. For this reason the readings of the digital pins are inverted
+so you get a 1 when you press a switch and a 0 when you release it.
+;
+#X connect 0 0 20 0;
+#X connect 3 0 20 0;
+#X connect 4 0 5 0;
+#X connect 5 0 20 0;
+#X connect 11 0 12 0;
+#X connect 11 1 13 0;
+#X connect 12 0 17 0;
+#X connect 12 1 18 0;
+#X connect 12 2 19 0;
+#X connect 13 0 14 0;
+#X connect 13 1 15 0;
+#X connect 13 2 16 0;
+#X connect 20 0 11 0;
+#X connect 28 0 11 1;
+#X connect 29 0 11 1;
