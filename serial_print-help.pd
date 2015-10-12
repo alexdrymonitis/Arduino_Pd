@@ -104,7 +104,7 @@ inverted so you get a 1 when you press a switch and a 0 when you release
 it.;
 #N canvas 269 139 511 479 receive_floats_strings_and_bangs 0;
 #X obj 72 174 vradio 15 1 0 3 empty empty empty 0 -8 0 10 -262144 -1
--1 2;
+-1 0;
 #X obj 72 310 serial_print;
 #X obj 72 332 s;
 #X obj 186 373 r receive_string;
@@ -121,8 +121,8 @@ it.;
 #X floatatom 72 396 0 0 0 0 - - -;
 #X obj 72 374 r receive_float;
 #X text 90 171 outputs a float;
-#X text 61 28 With [serial_print] it's possible to receive \, floats
-\, strings instead of numeral values \, or even bangs. Close [comport]
+#X text 61 28 With [serial_print] it's possible to receive floats \,
+strings instead of numeral values \, or even bangs. Close [comport]
 in the parent patch and load the float_string_bang.ino sketch to your
 Arduino board. Then open its serial port in this subpatch and click
 on the radio buttons below. The top button prints the Arduino hard-coded
