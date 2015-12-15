@@ -11,3 +11,6 @@ This repository is a set of Pd abstractions (both vanilla and extended) and Ardu
 Check their help patches and Arduino code for more information.
 
 Written by Alexandros Drymonitis
+
+
+Update Decemver 2015: enabled sending lists including symbols under one tag
