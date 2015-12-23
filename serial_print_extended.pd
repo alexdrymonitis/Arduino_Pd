@@ -1,4 +1,4 @@
-#N canvas 22 115 636 571 10;
+#N canvas 459 115 636 571 10;
 #X obj 47 120 inlet;
 #X text 392 512 written by Alexandros Drymonitis;
 #X obj 47 142 sel 10 13;
@@ -381,7 +381,7 @@ the symbol can also contain digits;
 #X connect 41 0 10 0;
 #X connect 42 0 1 0;
 #X restore 199 377 pd \$0-assemble_float;
-#N canvas 553 125 792 601 \$0-assemble_strings 0;
+#N canvas 153 151 792 601 \$0-assemble_strings 0;
 #X obj 231 116 inlet;
 #X obj 231 313 t l l;
 #X obj 231 291 list prepend;
@@ -488,23 +488,27 @@ through too;
 #X connect 38 1 39 0;
 #X connect 39 0 34 1;
 #X restore 182 329 pd \$0-assemble_strings;
-#N canvas 91 61 491 257 \$0-count 0;
+#N canvas 178 109 500 296 \$0-count 0;
 #X obj 45 145 f;
 #X obj 75 145 + 1;
 #X msg 60 122 0;
-#X obj 45 167 > 0;
+#X obj 45 190 > 0;
 #X obj 45 74 inlet;
-#X obj 45 194 outlet;
+#X obj 45 217 outlet;
 #X obj 60 99 r \$0-done;
-#X text 49 23 this is used in case a tab is followed by a symbol \,
-so the two (or more) symbols can be diffused properly;
+#X obj 45 167 t f f;
+#X obj 107 184 s \$0-total_count;
+#X text 49 23 this is used in case a delimiter is followed by a symbol
+\, so the two (or more) symbols can be diffused properly;
 #X connect 0 0 1 0;
-#X connect 0 0 3 0;
+#X connect 0 0 7 0;
 #X connect 1 0 0 1;
 #X connect 2 0 0 1;
 #X connect 3 0 5 0;
 #X connect 4 0 0 0;
 #X connect 6 0 2 0;
+#X connect 7 0 3 0;
+#X connect 7 1 8 0;
 #X restore 182 302 pd \$0-count;
 #X obj 165 252 t b b b b;
 #X obj 165 275 s \$0-delimit;
@@ -519,29 +523,31 @@ so the two (or more) symbols can be diffused properly;
 #X obj 182 450 t l l;
 #X obj 251 402 r \$0-done;
 #X obj 47 259 s \$0-done;
-#N canvas 0 22 439 279 ctl_newline 0;
-#X obj 49 124 inlet;
-#X obj 171 148 r \$0-total_count;
-#X obj 171 170 != 1;
-#X obj 156 192 f;
-#X obj 156 124 inlet received_bang;
-#X obj 49 231 outlet;
-#X obj 49 209 spigot 1;
-#X obj 94 164 r \$0-done;
-#X msg 94 186 1;
-#X text 45 20 if the only thing to be output is a bang \, the mail
+#N canvas 510 54 541 322 ctl_newline 0;
+#X obj 49 134 inlet;
+#X obj 171 158 r \$0-total_count;
+#X obj 156 202 f;
+#X obj 156 134 inlet received_bang;
+#X obj 49 241 outlet;
+#X obj 49 219 spigot 1;
+#X obj 94 174 r \$0-done;
+#X msg 94 196 1;
+#X obj 171 180 != 0;
+#X text 45 20 if the only thing to be output is a bang \, the main
 [list] should not be banged by the new line character. [r \$0-total_count]
-gives the number of elements to be output. if it gives 1 \, and that
-element is a bang \, [spigot] in this subpatch will close and open
-only after the new line has thrown its bangs;
-#X connect 0 0 6 0;
-#X connect 1 0 2 0;
-#X connect 2 0 3 1;
-#X connect 3 0 6 1;
-#X connect 4 0 3 0;
-#X connect 6 0 5 0;
-#X connect 7 0 8 0;
-#X connect 8 0 6 1;
+gives the number of elements to be output. if the only output is a
+bang \, since [moocow/bytes2nay] doesn't wait for the counter to give
+its output \, the value we'll get is 0 . this way [spigot] in this
+subpatch will close and open only after the new line has thrown its
+bangs;
+#X connect 0 0 5 0;
+#X connect 1 0 8 0;
+#X connect 2 0 5 1;
+#X connect 3 0 2 0;
+#X connect 5 0 4 0;
+#X connect 6 0 7 0;
+#X connect 7 0 5 1;
+#X connect 8 0 2 1;
 #X restore 66 325 pd ctl_newline;
 #X obj 246 351 t b b;
 #X connect 0 0 2 0;
