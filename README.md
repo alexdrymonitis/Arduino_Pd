@@ -13,6 +13,8 @@ Check their help patches and Arduino code for more information.
 Written by Alexandros Drymonitis
 
 
+
+
 Update December 2015: enabled sending lists including symbols under one tag
 
 Update December 2015: corrected the issue with sending a bang while there is data saved in the abstraction
