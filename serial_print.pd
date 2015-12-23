@@ -524,7 +524,7 @@ so the two (or more) symbols can be diffused properly;
 #X obj 49 209 spigot 1;
 #X obj 94 164 r \$0-done;
 #X msg 94 186 1;
-#X text 45 20 if the only thing to be output is a bang \, the mail
+#X text 45 20 if the only thing to be output is a bang \, the main
 [list] should not be banged by the new line character. [r \$0-total_count]
 gives the number of elements to be output. if it gives 1 \, and that
 element is a bang \, [spigot] in this subpatch will close and open
