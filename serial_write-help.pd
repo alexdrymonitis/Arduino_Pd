@@ -25,7 +25,6 @@ Serial.write() function (with the use of [comport]);
 #X floatatom 43 499 5 0 0 0 - - -, f 5;
 #X floatatom 77 499 5 0 0 0 - - -, f 5;
 #X floatatom 112 499 5 0 0 0 - - -, f 5;
-#X obj 43 430 comport 6 57600;
 #X text 41 115 You must specify the type of pins you want to read (analog
 or digital) and how many pins of this type you'll be reading. At least
 two arguments are necessary \, the third and fourth are optional \,
@@ -57,10 +56,11 @@ resistors \, using INPUT_PULLUP \, so you don't need to use resistors
 for switch. For this reason the readings of the digital pins are inverted
 so you get a 1 when you press a switch and a 0 when you release it.
 ;
-#X connect 0 0 20 0;
-#X connect 3 0 20 0;
+#X obj 43 430 comport 7 57600;
+#X connect 0 0 33 0;
+#X connect 3 0 33 0;
 #X connect 4 0 5 0;
-#X connect 5 0 20 0;
+#X connect 5 0 33 0;
 #X connect 11 0 12 0;
 #X connect 11 1 13 0;
 #X connect 12 0 17 0;
@@ -69,6 +69,6 @@ so you get a 1 when you press a switch and a 0 when you release it.
 #X connect 13 0 14 0;
 #X connect 13 1 15 0;
 #X connect 13 2 16 0;
-#X connect 20 0 11 0;
+#X connect 27 0 11 1;
 #X connect 28 0 11 1;
-#X connect 29 0 11 1;
+#X connect 33 0 11 0;
