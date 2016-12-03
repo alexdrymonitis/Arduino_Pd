@@ -1,6 +1,6 @@
-#N canvas 140 44 1019 681 10;
+#N canvas 307 127 1019 681 10;
 #X msg 54 398 close;
-#X obj 37 14 cnv 15 400 60 empty empty empty 20 12 0 14 -200075 -66577
+#X obj 37 14 cnv 15 440 60 empty empty empty 20 12 0 14 -200075 -66577
 0;
 #X text 746 624 Written by Alexandros Drymonitis;
 #X msg 43 371 devices;
@@ -14,8 +14,8 @@ Serial.print() and Serial.println() functions (with the use of [comport])
 #X text 540 166 Outlets:;
 #X obj 43 485 s;
 #X floatatom 43 565 5 0 0 0 - - -, f 5;
-#X floatatom 77 565 5 0 0 0 - - -, f 5;
-#X floatatom 112 565 5 0 0 0 - - -, f 5;
+#X floatatom 83 565 5 0 0 0 - - -, f 5;
+#X floatatom 124 565 5 0 0 0 - - -, f 5;
 #X text 541 26 Arguments: delimiter type (tab \, space \, comma \,
 any). You can provide up to two arguments (cause three arguments is
 the same as "any"). if no argument is provided \, then all three symbols
@@ -25,33 +25,33 @@ arguments \, you can use two delimiters separated by a space \, e.g.
 "tab comma");
 #X obj 43 541 unpack f f f;
 #X obj 173 541 unpack f f f;
-#X obj 173 564 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 173 564 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
-#X obj 207 564 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 213 564 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 242 564 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 254 564 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X text 40 78 [serial_print] is a vanilla abstraction that works with
 [comport] and Arduino's Serial.print() and Serial.println() functions.
 ;
-#N canvas 384 227 505 369 another_way_to_use_it 0;
+#N canvas 378 221 505 369 another_way_to_use_it 0;
 #X msg 49 140 close;
-#X msg 38 113 devices;
-#X floatatom 98 121 5 0 0 0 - - -, f 5;
-#X msg 98 140 open \$1;
+#X msg 38 91 devices;
+#X floatatom 128 121 5 0 0 0 - - -, f 5;
+#X msg 128 140 open \$1;
 #X obj 38 183 comport;
 #X obj 38 227 list prepend;
 #X obj 38 249 list trim;
 #X floatatom 38 317 5 0 0 0 - - -, f 5;
-#X floatatom 72 317 5 0 0 0 - - -, f 5;
-#X floatatom 107 317 5 0 0 0 - - -, f 5;
+#X floatatom 78 317 5 0 0 0 - - -, f 5;
+#X floatatom 119 317 5 0 0 0 - - -, f 5;
 #X obj 38 295 unpack f f f;
-#X obj 144 295 unpack f f f;
-#X obj 144 316 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 162 295 unpack f f f;
+#X obj 162 316 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 178 316 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 202 316 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 213 316 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 243 316 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X text 36 43 Instead of [send] and [receive] \, you can also use [route]
 \, but the [send]/[receive] technique might be a bit more intuitive...
@@ -60,6 +60,7 @@ arguments \, you can use two delimiters separated by a space \, e.g.
 to open this one.;
 #X obj 38 271 route Analog_values: Digital_values:;
 #X obj 38 205 serial_print any;
+#X obj 49 118 loadbang;
 #X connect 0 0 4 0;
 #X connect 1 0 4 0;
 #X connect 2 0 3 0;
@@ -77,6 +78,7 @@ to open this one.;
 #X connect 17 1 11 0;
 #X connect 18 0 5 0;
 #X connect 18 1 5 1;
+#X connect 19 0 0 0;
 #X restore 43 595 pd another_way_to_use_it;
 #X text 40 237 This help patch works with the serial_print.ino sketch.
 Check it for more information.;
@@ -95,12 +97,7 @@ A string must precede a value group \, which will be used as a tag
 the corresponding [receive]. The last value of each group must be printed
 with Serial.println() \, in order for [serial_print] to know a value
 group has ended.;
-#X text 41 278 Note: the digital pins are using the internal pull-up
-resistors \, using INPUT_PULLUP \, so you don't need to use resistors
-for switches. For this reason the readings of the digital pins are
-inverted so you get a 1 when you press a switch and a 0 when you release
-it.;
-#N canvas 203 86 892 524 receive_floats_strings_and_bangs 0;
+#N canvas 197 82 892 524 receive_floats_strings_and_bangs 0;
 #X obj 72 24 vradio 15 1 0 5 empty empty empty 0 -8 0 10 -262144 -1
 -1 4;
 #X obj 72 184 serial_print;
@@ -109,8 +106,8 @@ it.;
 #X obj 72 162 comport;
 #X obj 100 110 loadbang;
 #X msg 100 132 close;
-#X floatatom 155 111 5 0 0 0 - - -, f 5;
-#X msg 155 130 open \$1;
+#X floatatom 165 111 5 0 0 0 - - -, f 5;
+#X msg 165 130 open \$1;
 #X text 90 53 outputs a bang;
 #X text 90 37 outputs a string;
 #X floatatom 72 256 0 0 0 0 - - -;
@@ -122,18 +119,18 @@ it.;
 #X obj 314 234 r a_bang;
 #X obj 562 234 r mixed_list;
 #X floatatom 562 456 0 0 0 0 - - -;
-#X floatatom 595 431 0 0 0 0 - - -;
+#X floatatom 601 431 0 0 0 0 - - -;
 #X obj 562 408 unpack;
-#X obj 605 279 print bang_in_list;
+#X obj 613 279 print bang_in_list;
 #X obj 562 256 route list bang;
 #X obj 562 372 route a_string_in_a_list another_list_string last_list_string
 ;
-#X floatatom 649 456 0 0 0 0 - - -;
-#X floatatom 682 431 0 0 0 0 - - -;
-#X obj 649 408 unpack;
-#X floatatom 736 456 0 0 0 0 - - -;
-#X floatatom 769 431 0 0 0 0 - - -;
-#X obj 736 408 unpack;
+#X floatatom 663 456 0 0 0 0 - - -;
+#X floatatom 702 431 0 0 0 0 - - -;
+#X obj 663 408 unpack;
+#X floatatom 765 456 0 0 0 0 - - -;
+#X floatatom 804 431 0 0 0 0 - - -;
+#X obj 765 408 unpack;
 #X obj 614 316 list split 1;
 #X symbolatom 614 338 0 0 0 0 - - -;
 #X obj 562 299 t a a;
@@ -179,11 +176,16 @@ use them since these words have a special meaning in Pd.;
 #X connect 36 0 3 0;
 #X restore 43 621 pd receive_floats_strings_and_bangs;
 #X obj 43 463 serial_print any;
-#X obj 43 441 comport 7 9600;
-#X connect 0 0 32 0;
-#X connect 3 0 32 0;
+#X obj 43 441 comport 1 9600;
+#X text 41 278 Note: the digital pins are using the internal pull-up
+resistors \, using INPUT_PULLUP \, so you don't need to use resistors
+for switches. For this reason the readings of the digital pins are
+inverted so you get a 0 when you press a switch and a 1 when you release
+it.;
+#X connect 0 0 31 0;
+#X connect 3 0 31 0;
 #X connect 4 0 5 0;
-#X connect 5 0 32 0;
+#X connect 5 0 31 0;
 #X connect 16 0 11 0;
 #X connect 16 1 12 0;
 #X connect 16 2 13 0;
@@ -192,6 +194,6 @@ use them since these words have a special meaning in Pd.;
 #X connect 17 2 20 0;
 #X connect 26 0 16 0;
 #X connect 27 0 17 0;
-#X connect 31 0 10 0;
-#X connect 31 1 10 1;
-#X connect 32 0 31 0;
+#X connect 30 0 10 0;
+#X connect 30 1 10 1;
+#X connect 31 0 30 0;

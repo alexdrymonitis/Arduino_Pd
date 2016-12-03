@@ -1,4 +1,4 @@
-#define MAX_RAND 100
+#define MAX_RAND 10000
 
 String strings[3] = { "one_string", "another_string", "last_string" };
 int string_counter = 0;
@@ -21,7 +21,8 @@ void loop() {
       case 0:
         a_float = (float)random(MAX_RAND) / (float)MAX_RAND;
         Serial.print("a_float\t");
-        Serial.println(a_float);
+        // print a float with five digits
+        Serial.println(a_float, 5);
         break;
 
       case 1:
@@ -39,7 +40,7 @@ void loop() {
       case 3:
         negative_float = ((float)random(MAX_RAND) / (float)MAX_RAND) * -1.0;
         Serial.print("negative_float\t");
-        Serial.println(negative_float);
+        Serial.println(negative_float, 5);
         break;
 
       case 4:
@@ -47,7 +48,7 @@ void loop() {
         another_float = (float)random(MAX_RAND) / (float)MAX_RAND;
         Serial.print("mixed_list\t");
         Serial.print(list_strings[list_str_cnt]); Serial.print("\t");
-        Serial.print(another_float); Serial.print("\t");
+        Serial.print(another_float, 5); Serial.print("\t");
         Serial.print(an_int); Serial.print("\t");
         // the bang can't be included in a list in Pd, so it will be output last
         // no matter where it's placed in the Arduino code
