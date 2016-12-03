@@ -4,7 +4,7 @@ Arduino_Pd
 
 This repository is a set of Pd abstractions (both vanilla and extended) and Arduino code that facilitates the communication between the two platforms.
 
-`[serial_print]` (and its extended counterpart `[serial_print_extended]`) works with the `Serial.print()` and `Serial.println()` functions of the Arduino.
+`[serial_print]` (and its extended counterpart `[serial_print_extended]`) works with the `Serial.print()` and `Serial.println()` functions of the Arduino.  
 Even though Pd-extended is not developed or supported in any way any more, I'm still including an extended version of `[serial_print]` for those who still use this software. This version is in the Pd-extended_version/ directory of this repository.
 
 `[serial_write]` works with the `Serial.write()` function of the Arduino.
