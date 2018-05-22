@@ -1,0 +1,199 @@
+#N canvas 307 127 1019 681 10;
+#X msg 54 398 close;
+#X obj 37 14 cnv 15 440 60 empty empty empty 20 12 0 14 -200075 -66577
+0;
+#X text 746 624 Written by Alexandros Drymonitis;
+#X msg 43 371 devices;
+#X floatatom 103 379 5 0 0 0 - - -, f 5;
+#X msg 103 398 open \$1;
+#X text 45 22 [serial_print]: abstraction that works with Arduinos'
+Serial.print() and Serial.println() functions (with the use of [comport])
+;
+#X text 540 83 Inlets:;
+#X text 580 100 1st: bytes from [comport];
+#X text 540 166 Outlets:;
+#X obj 43 485 s;
+#X floatatom 43 565 5 0 0 0 - - -, f 5;
+#X floatatom 83 565 5 0 0 0 - - -, f 5;
+#X floatatom 124 565 5 0 0 0 - - -, f 5;
+#X text 541 26 Arguments: delimiter type (tab \, space \, comma \,
+any). You can provide up to two arguments (cause three arguments is
+the same as "any"). if no argument is provided \, then all three symbols
+will work as delimiters;
+#X text 580 115 2nd: change delimiter type with a symbol (as with the
+arguments \, you can use two delimiters separated by a space \, e.g.
+"tab comma");
+#X obj 43 541 unpack f f f;
+#X obj 173 541 unpack f f f;
+#X obj 173 564 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 213 564 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 254 564 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 40 78 [serial_print] is a vanilla abstraction that works with
+[comport] and Arduino's Serial.print() and Serial.println() functions.
+;
+#N canvas 378 221 505 369 another_way_to_use_it 0;
+#X msg 49 140 close;
+#X msg 38 91 devices;
+#X floatatom 128 121 5 0 0 0 - - -, f 5;
+#X msg 128 140 open \$1;
+#X obj 38 183 comport;
+#X obj 38 227 list prepend;
+#X obj 38 249 list trim;
+#X floatatom 38 317 5 0 0 0 - - -, f 5;
+#X floatatom 78 317 5 0 0 0 - - -, f 5;
+#X floatatom 119 317 5 0 0 0 - - -, f 5;
+#X obj 38 295 unpack f f f;
+#X obj 162 295 unpack f f f;
+#X obj 162 316 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 202 316 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 243 316 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 36 43 Instead of [send] and [receive] \, you can also use [route]
+\, but the [send]/[receive] technique might be a bit more intuitive...
+;
+#X text 38 13 Close [comport] on the parent patch before attempting
+to open this one.;
+#X obj 38 271 route Analog_values: Digital_values:;
+#X obj 49 118 loadbang;
+#X obj 38 205 serial_print13 any;
+#X connect 0 0 4 0;
+#X connect 1 0 4 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 19 0;
+#X connect 5 0 6 0;
+#X connect 6 0 17 0;
+#X connect 10 0 7 0;
+#X connect 10 1 8 0;
+#X connect 10 2 9 0;
+#X connect 11 0 12 0;
+#X connect 11 1 13 0;
+#X connect 11 2 14 0;
+#X connect 17 0 10 0;
+#X connect 17 1 11 0;
+#X connect 18 0 0 0;
+#X connect 19 0 5 0;
+#X connect 19 1 5 1;
+#X restore 43 595 pd another_way_to_use_it;
+#X text 40 237 This help patch works with the serial_print.ino sketch.
+Check it for more information.;
+#X text 584 184 1st: list of values of a group.;
+#X text 583 205 2nd: string to be used as a tag for a value group (print
+this first from the Arduino so that it works \, otherwise you'll probably
+get strange results). This comes out first \, then the value list out
+the left outlet;
+#X obj 43 517 r Analog_values:;
+#X obj 173 517 r Digital_values:;
+#X text 40 120 You can use commas \, spaces or tabs in between values
+to separate them. You can choose your delimiter via an argument (tab
+\, space \, comma or any \, or no argument which is the same as any).
+A string must precede a value group \, which will be used as a tag
+\, sent to the right inlet of [send] \, and used as an argument to
+the corresponding [receive]. The last value of each group must be printed
+with Serial.println() \, in order for [serial_print] to know a value
+group has ended.;
+#N canvas 197 82 892 524 receive_floats_strings_and_bangs 0;
+#X obj 72 24 vradio 15 1 0 5 empty empty empty 0 -8 0 10 -262144 -1
+-1 4;
+#X obj 72 206 s;
+#X symbolatom 186 255 0 0 0 0 - - -;
+#X obj 72 162 comport;
+#X obj 100 110 loadbang;
+#X msg 100 132 close;
+#X floatatom 165 111 5 0 0 0 - - -, f 5;
+#X msg 165 130 open \$1;
+#X text 90 53 outputs a bang;
+#X text 90 37 outputs a string;
+#X floatatom 72 256 0 0 0 0 - - -;
+#X text 90 21 outputs a float;
+#X text 90 69 outputs a negative number;
+#X floatatom 432 256 0 0 0 0 - - -;
+#X text 90 83 outputs a mixed list;
+#X obj 432 234 r negative_float;
+#X obj 314 234 r a_bang;
+#X obj 562 234 r mixed_list;
+#X floatatom 562 456 0 0 0 0 - - -;
+#X floatatom 601 431 0 0 0 0 - - -;
+#X obj 562 408 unpack;
+#X obj 613 279 print bang_in_list;
+#X obj 562 256 route list bang;
+#X obj 562 372 route a_string_in_a_list another_list_string last_list_string
+;
+#X floatatom 663 456 0 0 0 0 - - -;
+#X floatatom 702 431 0 0 0 0 - - -;
+#X obj 663 408 unpack;
+#X floatatom 765 456 0 0 0 0 - - -;
+#X floatatom 804 431 0 0 0 0 - - -;
+#X obj 765 408 unpack;
+#X obj 614 316 list split 1;
+#X symbolatom 614 338 0 0 0 0 - - -;
+#X obj 562 299 t a a;
+#X obj 314 256 print a_bang;
+#X obj 72 234 r a_float;
+#X obj 186 233 r a_string;
+#X text 442 36 With [serial_print] it's possible to receive floats
+\, strings \, negative values \, or even bangs. All these types can
+be included in a list. A bang though \, since it can't be included
+in a list \, will always be output last \, no matter where it is placed
+in the Arduino code. Close [comport] in the parent patch and load the
+float_string_bang.ino sketch to your Arduino board. Then open its serial
+port in this subpatch and click on the radio buttons below.;
+#X text 442 158 Note: [receive] arguments like "symbol" or "float"
+are possible \, but in general it's probably not a very good idea to
+use them since these words have a special meaning in Pd.;
+#X obj 72 184 serial_print13;
+#X connect 0 0 3 0;
+#X connect 3 0 38 0;
+#X connect 4 0 5 0;
+#X connect 5 0 3 0;
+#X connect 6 0 7 0;
+#X connect 7 0 3 0;
+#X connect 15 0 13 0;
+#X connect 16 0 33 0;
+#X connect 17 0 22 0;
+#X connect 20 0 18 0;
+#X connect 20 1 19 0;
+#X connect 22 0 32 0;
+#X connect 22 1 21 0;
+#X connect 23 0 20 0;
+#X connect 23 1 26 0;
+#X connect 23 2 29 0;
+#X connect 26 0 24 0;
+#X connect 26 1 25 0;
+#X connect 29 0 27 0;
+#X connect 29 1 28 0;
+#X connect 30 0 31 0;
+#X connect 32 0 23 0;
+#X connect 32 1 30 0;
+#X connect 34 0 10 0;
+#X connect 35 0 2 0;
+#X connect 38 0 1 0;
+#X connect 38 1 1 1;
+#X restore 43 621 pd receive_floats_strings_and_bangs;
+#X obj 43 441 comport 1 9600;
+#X text 41 278 Note: the digital pins are using the internal pull-up
+resistors \, using INPUT_PULLUP \, so you don't need to use resistors
+for switches. For this reason the readings of the digital pins are
+inverted so you get a 0 when you press a switch and a 1 when you release
+it.;
+#X obj 43 463 serial_print13 any;
+#X connect 0 0 30 0;
+#X connect 3 0 30 0;
+#X connect 4 0 5 0;
+#X connect 5 0 30 0;
+#X connect 16 0 11 0;
+#X connect 16 1 12 0;
+#X connect 16 2 13 0;
+#X connect 17 0 18 0;
+#X connect 17 1 19 0;
+#X connect 17 2 20 0;
+#X connect 26 0 16 0;
+#X connect 27 0 17 0;
+#X connect 30 0 32 0;
+#X connect 32 0 10 0;
+#X connect 32 1 10 1;
