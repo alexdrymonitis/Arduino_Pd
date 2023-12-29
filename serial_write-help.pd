@@ -37,7 +37,7 @@
 #X text 41 281 Note: the digital pins are using the internal pull-up resistors \, using INPUT_PULLUP \, so you don't need to use resistors for switches in your circuit. For this reason the readings of the digital pins are inverted in the Arduino code so you get a 1 when you press a switch and a 0 when you release it.;
 #X msg 134 450 analog 0;
 #X msg 149 475 digital 1;
-#X obj 43 470 comport 1 57600;
+#X obj 43 470 comport 0 57600;
 #X connect 0 0 38 0;
 #X connect 3 0 38 0;
 #X connect 4 0 5 0;
